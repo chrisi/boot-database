@@ -1,25 +1,16 @@
 package net.gtidev.sandbox.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "BOOK")
 public class Book implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+  @SequenceGenerator(name = "author_seq_gen", sequenceName = "author_id_seq")
   private Long id;
 
   private String name;
@@ -64,11 +55,13 @@ public class Book implements Serializable {
     return release;
   }
 
-  public Date getCreated() {
-    return created;
-  }
 
-  public Date getModified() {
-    return modified;
+
+  public String toSQL() {
+    return "insert into BOOK (id,name,author_id,release) values ({id},'{name}',{author_id},'{release}');"
+        .replace("{id}", id.toString())
+        .replace("{name}", name)
+        .replace("{author_id}", author.getId().toString())
+        .replace("{release}", release.toString());
   }
 }

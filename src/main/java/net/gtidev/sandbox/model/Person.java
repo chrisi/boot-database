@@ -1,17 +1,8 @@
 package net.gtidev.sandbox.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERSON")
@@ -19,7 +10,8 @@ import javax.persistence.Table;
 public class Person implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_seq_gen")
+  @SequenceGenerator(name = "person_seq_gen", sequenceName = "person_id_seq")
   private Long id;
 
   private String firstName;
