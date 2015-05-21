@@ -14,6 +14,10 @@
   <artifactId>boot-database</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+
   <dependencies>
 
     <dependency>
@@ -63,6 +67,14 @@
       <scope>runtime</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.4</version>
+      <scope>provided</scope>
+    </dependency>
+
+
   </dependencies>
 
   <build>
@@ -71,6 +83,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+
+      <!--<plugin>-->
+      <!--<groupId>org.projectlombok</groupId>-->
+      <!--<artifactId>lombok-maven</artifactId>-->
+      <!--<version>1.16.4.1</version>-->
+      <!--</plugin>-->
     </plugins>
   </build>
 

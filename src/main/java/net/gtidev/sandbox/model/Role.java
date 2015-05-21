@@ -1,9 +1,12 @@
 package net.gtidev.sandbox.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "ROLE")
 @SequenceGenerator(name = "seqGen", sequenceName = "role_id_seq")
 public class Role extends Record<Long> {
@@ -16,28 +19,4 @@ public class Role extends Record<Long> {
       joinColumns = {@JoinColumn(name = "ROLE_ID")},
       inverseJoinColumns = {@JoinColumn(name = "CHILDROLE_ID")})
   private List<Role> roles;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public List<Role> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
-  }
 }

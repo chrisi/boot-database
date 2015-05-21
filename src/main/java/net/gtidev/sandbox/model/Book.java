@@ -1,10 +1,17 @@
 package net.gtidev.sandbox.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
+import net.gtidev.sandbox.MyDateDeserializer;
+import net.gtidev.sandbox.MyDateSerializer;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "BOOK")
 public class Book implements Serializable {
 
@@ -18,9 +25,14 @@ public class Book implements Serializable {
   @JoinColumn(name = "AUTHOR_ID")
   private Person author;
   private String isbn;
+  @JsonDeserialize(using = MyDateDeserializer.class)
+  @JsonSerialize(using = MyDateSerializer.class)
   private Date release;
-
+  @JsonDeserialize(using = MyDateDeserializer.class)
+  @JsonSerialize(using = MyDateSerializer.class)
   private Date created;
+  @JsonDeserialize(using = MyDateDeserializer.class)
+  @JsonSerialize(using = MyDateSerializer.class)
   private Date modified;
 
   @PreUpdate
@@ -34,28 +46,6 @@ public class Book implements Serializable {
     created = now;
     modified = now;
   }
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public Person getAuthor() {
-    return author;
-  }
-
-  public String getIsbn() {
-    return isbn;
-  }
-
-  public Date getRelease() {
-    return release;
-  }
-
-
 
   public String toSQL() {
     return "insert into BOOK (id,name,author_id,release) values ({id},'{name}',{author_id},'{release}');"

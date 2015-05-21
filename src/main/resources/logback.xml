@@ -6,11 +6,12 @@
     </encoder>
   </appender>
 
-  <root level="WARN">
+  <root level="INFO">
     <appender-ref ref="STDOUT"/>
   </root>
 
-  <logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer" level="DEBUG"/>
-  <logger name="org.hibernate" level="DEBUG"/>
+  <!--<logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer" level="DEBUG"/>-->
+  <!--<logger name="org.hibernate" level="DEBUG"/>-->
+  <logger name="net.gtidev" level="DEBUG"/>
 
 </configuration>

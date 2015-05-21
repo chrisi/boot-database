@@ -1,10 +1,17 @@
 package net.gtidev.sandbox.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
+import net.gtidev.sandbox.MyDateDeserializer;
+import net.gtidev.sandbox.MyDateSerializer;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "PERSON")
 @NamedQuery(name = "Person.findByName", query = "select p from Person p where p.lastName = :lastName")
 public class Person implements Serializable {
@@ -16,28 +23,10 @@ public class Person implements Serializable {
 
   private String firstName;
   private String lastName;
+  @JsonDeserialize(using = MyDateDeserializer.class)
+  @JsonSerialize(using = MyDateSerializer.class)
   private Date birthDate;
   @ManyToOne
   @JoinColumn(name = "ADDRESS_ID")
   private Address address;
-
-  public Long getId() {
-    return id;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public Date getBirthDate() {
-    return birthDate;
-  }
-
-  public Address getAddress() {
-    return address;
-  }
 }
