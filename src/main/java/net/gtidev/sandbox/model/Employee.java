@@ -1,11 +1,13 @@
 package net.gtidev.sandbox.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "EMPLOYEE", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"EMP_NO"})
 })

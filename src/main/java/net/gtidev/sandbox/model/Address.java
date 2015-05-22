@@ -8,22 +8,18 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "ADDRESS")
-public class Address implements Serializable {
+@SequenceGenerator(name = "seqGen", sequenceName = "address_id_seq")
+public class Address extends Record<Long> {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq_gen")
-  @SequenceGenerator(name = "address_seq_gen", sequenceName = "address_id_seq")
-  private Long id;
+    private String street;
+    private String zip;
+    private String city;
 
-  private String street;
-  private String zip;
-  private String city;
-
-  public String toSQL() {
-    return "insert into ADDRESS (id,street,zip,city) values ({id},'{street}','{zip}','{city}');"
-        .replace("{id}", id.toString())
-        .replace("{street}", street)
-        .replace("{zip}", zip)
-        .replace("{city}", city);
-  }
+    public String toSQL() {
+        return "insert into ADDRESS (id,street,zip,city) values ({id},'{street}','{zip}','{city}');"
+                .replace("{id}", getId().toString())
+                .replace("{street}", street)
+                .replace("{zip}", zip)
+                .replace("{city}", city);
+    }
 }

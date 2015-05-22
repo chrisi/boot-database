@@ -2,6 +2,7 @@ package net.gtidev.sandbox.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Builder;
 import lombok.Data;
 import net.gtidev.sandbox.MyDateDeserializer;
 import net.gtidev.sandbox.MyDateSerializer;

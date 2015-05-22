@@ -1,12 +1,13 @@
 package net.gtidev.sandbox.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "ROLE")
 @SequenceGenerator(name = "seqGen", sequenceName = "role_id_seq")
 public class Role extends Record<Long> {
